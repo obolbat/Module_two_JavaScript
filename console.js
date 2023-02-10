@@ -1,18 +1,12 @@
-let money = 50000,
-    profit = '30000',
-    expenses = 'Питание, Бензин, Еда котикам',
-    purpose = 300000,
-    period = 3;
-
-console.log('Тип переменной money:', typeof money);
-console.log('Тип переменной profit:', typeof profit);
-console.log(expenses, 'Длина строки expenses:', expenses.length);
-console.log('Период равен', period, 'месяцев');
-
-let budgetDay = money / 30;
-console.log('Дневной бюджет', budgetDay);
-
-//приводим к нижнему регистру, разбиваем на массив
-expenses = expenses.toLocaleLowerCase();
-let arrayExpenses = expenses.split(', ');
-console.log(arrayExpenses);
+let oneNumber = parseFloat(prompt('Введите первое число:'));
+let twoNumber = parseFloat(prompt('Введите второе число:'));
+if (isNaN(oneNumber) || isNaN(twoNumber)) {
+    document.write('Вы ввели не числовые значения')
+}
+else {
+    document.write(`При сложении чисел ${oneNumber} + ${twoNumber} = ${(oneNumber + twoNumber).toFixed(2)} <br>`);
+    document.write(`При вычитании чисел ${oneNumber} - ${twoNumber} = ${(oneNumber - twoNumber).toFixed(2)} <br>`);
+    document.write(`При умножении чисел ${oneNumber} * ${twoNumber} = ${(oneNumber * twoNumber).toFixed(2)} <br>`);
+    document.write(`При делении чисел ${oneNumber} / ${twoNumber} = ${(oneNumber / twoNumber).toFixed(1)} <br>`);
+    document.write(`Остаток от деления чисел ${oneNumber} % ${twoNumber} = ${Math.round(oneNumber % twoNumber)} <br>`);
+}
