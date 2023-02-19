@@ -26,4 +26,3 @@ if (budgetDay < 0 ) {
 } else {
     console.log('У вас средний уровень дохода');
 }
-
