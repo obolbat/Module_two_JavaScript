@@ -1,28 +1,37 @@
-const money = prompt('Ваш месячный доход?');
-const purpose = prompt('Сколько вы хотите накопить?');
-let expenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-const amount = prompt('Во сколько обойдуться обязательные статьи расходов?');
-const hasDeposit = true;
+let week = ["понедельник","вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"];
+const today = "понедельник";
 
-const budgetMonth = money - amount;
-console.log('Ваш бюджет на месяц:', budgetMonth);
-console.log('Вы хотите накопить:', purpose);
-console.log('Ваши расходы:', expenses);
-console.log('Сумма расходов:', amount);
+/** первый вариант */
+// for (let i = 0; i < week.length; i++) {
+//     const isHoliday = i === 5 || i === 6;
+//
+//     if (isHoliday) {
+//         document.write('<b>');
+//     }
+//     if (week[i] === today) {
+//         document.write('<i>');
+//     }
+//     document.write(week[i] + '<br>');
+//     if (week[i] === today) {
+//         document.write('</i>');
+//     }
+//
+//     if (isHoliday) {
+//         document.write('</b>');
+//     }
+// }
+/** TODO: второй вариант  доработать с с объектом даты */
+for (let i = 0; i < week.length; i++) {
+    const isHoliday = i === 5 || i === 6;
 
-const budgetDay = Math.floor(budgetMonth / 30);
-const months = Math.ceil(purpose / budgetMonth);
-if (budgetMonth > 0) {
-    console.log(`Вы достигните цели через: ${months} месяца (-ев)`);
-    console.log('Ваш дневной бюджет:', budgetDay);
-} else ('Увы, вы не накопите');
+    document.write('<span style="' + (isHoliday ? 'font-weight:800' : '') + (week[i] === today ? 'font-style: italic' : '') + '">' + week[i] + '</span><br/>');
+}
 
-if (budgetDay < 0 ) {
-    console.log('Что-то пошло не так');
-} else if (budgetDay > 6000 ) {
-    console.log('У вас высокий уровень дохода');
-} else if (budgetDay < 3000 && budgetDay < 0 ) {
-    console.log('К сожалению у вас уровень дохода ниже среднего');
-} else {
-    console.log('У вас средний уровень дохода');
+let numders = [768, 56, 345, 993, 5489, 3889, 8445];
+for (let i = 0; i < numders.length; i++) {
+    let stringNumbers = numders[i] + '';
+
+    if (stringNumbers[0] === '3' || stringNumbers[0] === '7') {
+        document.write(stringNumbers + '<br>');
+    }
 }
