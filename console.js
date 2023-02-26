@@ -1,12 +1,37 @@
-let oneNumber = parseFloat(prompt('Введите первое число:'));
-let twoNumber = parseFloat(prompt('Введите второе число:'));
-if (isNaN(oneNumber) || isNaN(twoNumber)) {
-    document.write('Вы ввели не числовые значения')
+let week = ["понедельник","вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"];
+const today = "понедельник";
+
+/** первый вариант */
+// for (let i = 0; i < week.length; i++) {
+//     const isHoliday = i === 5 || i === 6;
+//
+//     if (isHoliday) {
+//         document.write('<b>');
+//     }
+//     if (week[i] === today) {
+//         document.write('<i>');
+//     }
+//     document.write(week[i] + '<br>');
+//     if (week[i] === today) {
+//         document.write('</i>');
+//     }
+//
+//     if (isHoliday) {
+//         document.write('</b>');
+//     }
+// }
+/** TODO: второй вариант  доработать с с объектом даты */
+for (let i = 0; i < week.length; i++) {
+    const isHoliday = i === 5 || i === 6;
+
+    document.write('<span style="' + (isHoliday ? 'font-weight:800' : '') + (week[i] === today ? 'font-style: italic' : '') + '">' + week[i] + '</span><br/>');
 }
-else {
-    document.write(`При сложении чисел ${oneNumber} + ${twoNumber} = ${(oneNumber + twoNumber).toFixed(2)} <br>`);
-    document.write(`При вычитании чисел ${oneNumber} - ${twoNumber} = ${(oneNumber - twoNumber).toFixed(2)} <br>`);
-    document.write(`При умножении чисел ${oneNumber} * ${twoNumber} = ${(oneNumber * twoNumber).toFixed(2)} <br>`);
-    document.write(`При делении чисел ${oneNumber} / ${twoNumber} = ${(oneNumber / twoNumber).toFixed(1)} <br>`);
-    document.write(`Остаток от деления чисел ${oneNumber} % ${twoNumber} = ${Math.round(oneNumber % twoNumber)} <br>`);
+
+let numders = [768, 56, 345, 993, 5489, 3889, 8445];
+for (let i = 0; i < numders.length; i++) {
+    let stringNumbers = numders[i] + '';
+
+    if (stringNumbers[0] === '3' || stringNumbers[0] === '7') {
+        document.write(stringNumbers + '<br>');
+    }
 }
