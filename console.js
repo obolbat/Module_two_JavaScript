@@ -17,6 +17,8 @@ if (budgetMonth > 0) {
     console.log('Ваш дневной бюджет:', budgetDay);
 } else ('Увы, вы не накопите');
 
+
+
 if (budgetDay < 0 ) {
     console.log('Что-то пошло не так');
 } else if (budgetDay > 6000 ) {
