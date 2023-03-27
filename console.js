@@ -23,12 +23,12 @@ getPost()
         //в result храним полученный результат, смотрим, если есть ключ, значит элемент не последний, тогда добавляем запятую, если последний, то ничего не добавляем
         let text = users.reduce((result, item, $key) => {
             return result + ($key ? ',' : '') + ' ' + item.last_name + ' ' + item.first_name;
-        }, 'Наша база содержит данныеследующихпользователей:');
+        }, 'Наша база содержит данные следующих пользователей:');
         console.log(text);
 
         // или вторым вариантом методом map  вывести те же данные фамилию и имя всех пользователей в массиве
         let newText = users.map(item => item.last_name + ' ' + item.first_name).join(', ');
-        console.log(newText);
+        console.log(`Наша база содержит данные следующих пользователей: ${newText}`);
 
         let user = users[0];
         console.log(Object.keys(user));
