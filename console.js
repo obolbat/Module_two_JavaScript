@@ -1,62 +1,101 @@
-let money,
-    purpose,
-    extraMoney,
-    amount;
-//let expenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-//let profit = prompt('Перечислите дополнительные виды дохода:');
 
-const hasDeposit = true;
+/**
+ * Обработчик события отправки формы
+ */
+document.querySelectorAll('.js-form').forEach(form => {
+    form.addEventListener('submit', sendForm);
+});
 
-money = +prompt('Ваш месячный доход?');
-while (isNaN(money)) {
-    money = +prompt('Вы ввели не число. Ваш месячный доход?');
+/**
+ * Обработчик получения фокуса у поля. Скрываем ошибку
+ */
+document.querySelectorAll('.autorization_entry-field input').forEach(input => {
+    input.addEventListener('focus', inputFocus);
+});
+
+/**
+ * Обработчик клика по чекбоксу. Скрываем ошибку
+ */
+document.querySelectorAll('.entry-checkbox input').forEach(input => {
+    input.addEventListener('change', inputFocus);
+});
+
+/**
+ * Валидация и отправка формы
+ * @param event
+ */
+function sendForm(event) {
+    const form = event.target;
+    const arInputs = form.querySelectorAll('.entry-field_required input');
+    let isValid = true;
+    let formData = {};
+
+    /** Предотвращаем выполнение стандартной логики отправки формы */
+    event.preventDefault();
+
+    /** В цикле обрабатываем все поля формы */
+    for (let i = 0; i < arInputs.length; i++) {
+        let input = arInputs[i];
+
+        if (!inputValidation(input)) {
+            isValid = false;
+        }
+
+        formData[input.name] = input.value;
+    }
+
+    /** Форма валидна, можно отправлять данные */
+    if (isValid) {
+        console.log(formData);
+    }
 }
 
-purpose = +prompt('Сколько вы хотите накопить?');
-while (isNaN(purpose)) {
-    purpose = +prompt('Вы ввели не число. Сколько вы хотите накопить?');
+/**
+ * Валидация поля
+ * @param input
+ * @returns {boolean}
+ */
+function inputValidation(input) {
+    const value = input.value;
+    const parentNode = input.parentNode;
+    let errMessage = '';
+
+    if (!value) {
+        errMessage = 'Поле обязательно для заполнения';
+    }
+    else if (input.type === 'checkbox' && !input.checked) {
+        errMessage = 'Поле обязательно для заполнения';
+    }
+    else if (input.type === 'password' && value.length < 8) {
+        errMessage = 'Пароль должен содержать как минимум 8 символов';
+    }
+    else if (input.type === 'email' && !validateEmail(value)) {
+        errMessage = 'Email невалидный';
+    }
+
+    if (errMessage) {
+        parentNode.classList.add('entry-field_error');
+        parentNode.querySelector('.signature').innerText = errMessage;
+    }
+
+    return !errMessage;
 }
 
-extraMoney = +prompt(`Перечислите возможный доход за ваши дополнительные работы:`);
-while (isNaN(extraMoney)) {
-    extraMoney = +prompt('Вы ввели не число. Введите дополнительный доход:');
+/**
+ * Обработка события фокуса элемента. Убираем класс ошибки
+ * @param event
+ */
+function inputFocus(event) {
+    event.target.parentNode.classList.remove('entry-field_error');
 }
 
-amount = +prompt('Во сколько обойдуться обязательные статьи расходов?');
-while (isNaN(amount)) {
-    amount = +prompt('Вы ввели не число. Введите сумму обязательных расходов:');
+/**
+ * Проверка корректности email
+ * @param email
+ * @returns {boolean}
+ */
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return re.test(String(email).toLowerCase());
 }
-
-const getAccumulatedIncome = (money, amount, extraMoney) => {
-    return money + extraMoney - amount;
-};
-
-const accumulatedIncome = getAccumulatedIncome(money, amount, extraMoney);
-const getTargetMonth = (accumulatedIncome, purpose) => {
-    return Math.floor(purpose / accumulatedIncome);
-};
-//
-const getBudgetDay = (budgetMonth) => {
-    return (budgetMonth / 30).toFixed(2);
-};
-console.log('Ваш бюджет на месяц:', accumulatedIncome);
-
-const budgetDay = getBudgetDay(accumulatedIncome);
-
-if (accumulatedIncome > 0) {
-    console.log(`Ваша цель накопить ${purpose} с учетом всех ваших расходов цель будет достигнута через`, getTargetMonth(accumulatedIncome, purpose) + ' месяца');
-    console.log('Ваш дневной бюджет:', budgetDay);
-} else {
-    console.log('Цель не будет достигнута');
-}
-
-if (budgetDay < 0 ) {
-    console.log('Расходы превышают доходы');
-} else if (budgetDay > 6000 ) {
-    console.log('У вас высокий уровень дохода');
-} else if (budgetDay < 3000 && budgetDay < 0 ) {
-    console.log('К сожалению у вас уровень дохода ниже среднего');
-} else {
-    console.log('У вас средний уровень дохода');
-}
-

@@ -1,68 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Autorization</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body class="body">
 
-  <div class="calculator">
-    <div class="calculator__items">
-      <div class="">
-        <h2>Ваш месячный доход?</h2>
-        <input placeholder="Введите сумму" type="text" id="income">
-      </div>
+<div class="autorization">
+    <span class="autorization_link"><a href="">Авторизоваться</a></span>
+    <h1 class="entry">Регистрация</h1>
+    <!--
+    Нна форму вешаем класс с приставкой js, чтобы было понятно, что его используем в js логике.
+    На данный классбудем вешать обработчики событий формы
+    -->
+    <form action="" class="js-form">
+        <div class="autorization_entry-field entry-field_required">
+            <label for="username" class="autorization_label">Email</label>
+            <input type="email" name="email" placeholder="Введите email" id="username" class="autorization_username">
+            <p class="signature"></p>
+        </div>
 
-      <div class="">
-        <h2>Перечислите какие у вас дополнительные доходы через запятую?</h2>
-        <input placeholder="Фриланс, курьер и тд" type="text" id="additionalIncome">
-      </div>
+        <div class="autorization_entry-field entry-field_required">
+            <label for="password" class="autorization_label">Пароль</label>
+            <input type="password" name="password" placeholder="Введите пароль" id="password" class="autorization_username">
+            <p class="signature"></p>
+        </div>
+        <div class="entry-checkbox entry-field_required">
+            <input class="input-checkbox" name="agree" id="checkbox" type="checkbox">
+            <label class="input-checkbox__label" for="checkbox">Я согласен получать обновления на почту</label>
+            <p class="signature"></p>
+        </div>
+        <button class="wrapper">Регистрация</button>
+    </form>
+</div>
 
-      <div class="">
-        <h2>Какая сумма дополнительных доходов?</h2>
-        <input placeholder="Введите сумму" type="text" id="sumAdditionalIncome">
-      </div>
 
-      <div class="">
-        <h2>Ваши обязательные расходы перечислите через запятую?</h2>
-        <input placeholder="проезд, коммуналка и тд" type="text" id="expenses">
-      </div>
-
-      <div class="">
-        <h2>Какую сумму вы бы хотели накопить?</h2>
-        <input placeholder="Введите сумму" type="text" id="savings">
-      </div>
-
-      <div class="">
-        <h2>За какой период вы бы хотели накопить желаемую сумму?</h2>
-        <input placeholder="Укажите кол-во месяцев" type="text" id="period">
-      </div>
-
-      <button class="calculator__items-submit" onclick="calc()">Рассчитать</button>
-    </div>
-
-    <div class="calculator__result">
-      <div class="calculator__result-item item">
-        Ваш бюджет на месяц с учетом ваших расходов составляет: <span class="item__result" id="sumMoney"></span>
-      </div>
-
-      <div class="calculator__result-item item">
-        Ваш дневной бюджет: <span class="item__result" id="sumMoneyDay"></span>
-      </div>
-
-      <div class="calculator__result-item item">
-        Ваша цель накопить <span class="item__result" id="sumMoneyPurpose"></span> с учетом всех ваших расходов будет достигнута через <span class="item__result" id="purpose"></span> месяцев
-      </div>
-
-      <div class="calculator__result-item item">
-        Ваш уровень дохода<span class="item__result" id="incomeLevel"></span> месяцев
-      </div>
-    </div>
-  </div>
-  
-  <script src="./script.js"></script>
+<script src="console.js"></script>
 </body>
 </html>
