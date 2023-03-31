@@ -1,10 +1,52 @@
+const regForm = document.getElementById('reg_form');
+const authForm = document.getElementById('auth_form');
 
 /**
- * Обработчик события отправки формы
+ * Обработчик события отправки формы регистрации и записи в Local Storage
  */
-document.querySelectorAll('.js-form').forEach(form => {
-    form.addEventListener('submit', sendForm);
-});
+if (regForm) {
+    regForm.addEventListener('submit', event => {
+        /** Предотвращаем выполнение стандартной логики отправки формы */
+        event.preventDefault();
+
+        if (validateForm(event.target)) {
+            const inputUserName = document.getElementById('username');
+            const inputPassword = document.getElementById('password');
+            localStorage.setItem('username', inputUserName.value);
+            localStorage.setItem('password', inputPassword.value);
+        }
+    });
+
+}
+
+/**
+ * Обработчик события отправки формы авторизации, данные Local Storage сравниваем с введенными
+ */
+if (authForm) {
+    document.getElementById('auth_form').addEventListener('submit', event => {
+        const form = event.target;
+
+        /** Предотвращаем выполнение стандартной логики отправки формы */
+        event.preventDefault();
+
+        if (validateForm(form)) {
+            const inputUserName = document.getElementById('username');
+            const inputPassword = document.getElementById('password');
+
+            if (
+                localStorage.getItem('username') === inputUserName.value &&
+                localStorage.getItem('password') === inputPassword.value
+            ) {
+                location.replace("./application.html");
+            }
+            else {
+                const errBlock = form.querySelector('.error_text');
+                errBlock.innerText = 'Логин/Пароль не верные';
+                errBlock.style.display = 'block';
+            }
+        }
+    });
+}
 
 /**
  * Обработчик получения фокуса у поля. Скрываем ошибку
@@ -21,17 +63,13 @@ document.querySelectorAll('.entry-checkbox input').forEach(input => {
 });
 
 /**
- * Валидация и отправка формы
+ * Валидация формы
  * @param event
  */
-function sendForm(event) {
-    const form = event.target;
+function validateForm(form) {
     const arInputs = form.querySelectorAll('.entry-field_required input');
     let isValid = true;
     let formData = {};
-
-    /** Предотвращаем выполнение стандартной логики отправки формы */
-    event.preventDefault();
 
     /** В цикле обрабатываем все поля формы */
     for (let i = 0; i < arInputs.length; i++) {
@@ -44,10 +82,7 @@ function sendForm(event) {
         formData[input.name] = input.value;
     }
 
-    /** Форма валидна, можно отправлять данные */
-    if (isValid) {
-        console.log(formData);
-    }
+    return isValid;
 }
 
 /**

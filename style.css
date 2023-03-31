@@ -125,3 +125,8 @@
 .entry-field_error .input-checkbox__label:before {
   border-color: #CB2424;
 }
+.error_text {
+  display: none;
+  color: #CB2424;
+  padding-left: 30px;
+}
